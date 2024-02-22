@@ -10,15 +10,17 @@ if not os.path.exists(save_path):
 
 np.random.seed(42)
 
-n_list = [8, 16, 32, 64, 128, 256, 512, 1024]
+n_list = [8, 16, 32, 64, 128]
 
 
-F = sigmoid
+F = gaussian_cdf
+L = 50
 
 for n in n_list:
     theta = -np.linspace(0, 5, n, endpoint=True)
     theta = theta - np.mean(theta)
     model = LST(theta=theta, link=F, n=n)
+    model.sample(L=L, p=2*np.log(n)/n)
     P = model.tmat
     e, v = la.eig(P.T)
     idx = np.argmax(e.real)
@@ -39,6 +41,7 @@ for n in n_list:
     theta = -np.arange(n) * 0.1
     theta = theta - np.mean(theta)
     model = LST(theta=theta, link=F, n=n)
+    model.sample(L=L, p=2*np.log(n)/n)
     P = model.tmat
     e, v = la.eig(P.T)
     idx = np.argmax(e.real)
