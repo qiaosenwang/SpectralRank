@@ -21,6 +21,9 @@ def kendall_tau(x, y):
     # use kendalltau(x,y).statistic for SciPy version >=1.10
     return (1-st.kendalltau(x, y).correlation) / 2
 
+def topK(x, y, K=1):
+    return ((x[:K])==(y[:K])).all()
+
 
 model_dict = {"Bradley-Terry": sigmoid, 
               "Thurstone": gaussian_cdf, 

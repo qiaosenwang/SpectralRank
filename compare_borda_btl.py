@@ -132,7 +132,7 @@ for name in model_list:
             model.sample(L=L, p=1.1*np.log(n)/n)
             model.solve()
             sr_tau[i] = kendall_tau(np.argsort(model.theta), np.argsort(model.pi_hat)) / rep
-            model.solve(delta=delta)
+            model.solve(delta=delta/np.sqrt)
             rg_tau[i] = kendall_tau(np.argsort(model.theta), np.argsort(model.pi_hat)) / rep
             model.borda_count()
             bc_tau[i] = kendall_tau(np.argsort(model.theta), np.argsort(model.borda_score)) / rep
